@@ -157,13 +157,13 @@ fun ColorPickerArea(
 private fun ColorPickerAreaPreview() {
 
     val density = LocalDensity.current
-    val ringWidth = 48.dp
+    val ringWidthPx = with(density) { 48.dp.toPx() }
 
     var x by remember { mutableStateOf(0f) }
     var y by remember { mutableStateOf(0f) }
 
     val brush = ColorPickerBrushes.hueRing()
-    val limiter = remember { RingLimiter(density, ringWidth) }
+    val limiter = remember(ringWidthPx) { RingLimiter(ringWidthPx) }
 
     Column(
         modifier = Modifier
@@ -207,7 +207,7 @@ private fun ColorPickerAreaPreview() {
                 modifier = Modifier
                     .aspectRatio(1f)
                     .size(400.dp),
-                style = ColorPickerAreaStyles.ring(width = ringWidth),
+                style = ColorPickerAreaStyles.ring(ringWidthPx = ringWidthPx),
                 valueX = x,
                 valueY = 0f,
                 onValueChangeX = { x = it },

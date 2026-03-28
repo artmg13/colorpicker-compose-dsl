@@ -38,14 +38,13 @@ object ColorPickerAreaStyles {
     )
 
     fun ring(
-        width: Dp = 24.dp,
+        ringWidthPx: Float,
         shape: Shape = CircleShape,
         contentPadding: PaddingValues = PaddingValues(0.dp),
         clip: Boolean = true,
         draw: DrawScope.() -> Unit = {
-            val w = width.toPx()
             val outer = size.minDimension / 2f
-            val inner = outer - w
+            val inner = outer - ringWidthPx
 
             drawCircle(
                 color = Color.Transparent,

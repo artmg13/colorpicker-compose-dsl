@@ -61,9 +61,6 @@ private fun RingSliderDefault(
     brush: ColorPickerBrush,
     config: RingSliderScope
 ) {
-    val style =
-        ColorPickerAreaStyles.ring(width = config.ringWidth, contentPadding = config.contentPadding)
-
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
@@ -74,8 +71,8 @@ private fun RingSliderDefault(
         onValueChange = config.onValueChange,
         brush = brush,
         ringWidth = config.ringWidth,
+        contentPadding = config.contentPadding,
         reversed = config.reversed,
-        style = style,
         thumbSize = thumbSize,
         thumb = thumb
     )

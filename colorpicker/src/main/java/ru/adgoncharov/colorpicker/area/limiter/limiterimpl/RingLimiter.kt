@@ -12,11 +12,8 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 class RingLimiter(
-    density: Density,
-    ringWidth: Dp
+    private val ringWidthPx: Float
 ) : Limiter {
-
-    private val ringWidth = with(density) { ringWidth.toPx() }
 
     override fun limitPosition(
         position: Offset,
@@ -91,7 +88,7 @@ class RingLimiter(
         thumbSize: IntSize,
     ): Float {
         val outer = minOf(sliderSize.width, sliderSize.height) / 2f
-        val inner = (outer - ringWidth)
+        val inner = (outer - ringWidthPx)
 
         return (inner + outer) / 2f
     }

@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -39,15 +40,21 @@ fun RingColorPickerArea(
     onValueChange: (Float) -> Unit,
     brush: ColorPickerBrush,
     ringWidth: Dp = 48.dp,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
     reversed: Boolean = false,
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
-    style: ColorPickerAreaStyle = ColorPickerAreaStyles.ring(ringWidth),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
     val density = LocalDensity.current
-
-    val limiter = remember(density, ringWidth) { RingLimiter(density, ringWidth) }
+    val ringWidthPx = with(density) { ringWidth.toPx() }
+    val limiter = remember(ringWidthPx) { RingLimiter(ringWidthPx = ringWidthPx) }
+    val style = remember(
+        ringWidthPx,
+        contentPadding
+    ) {
+        ColorPickerAreaStyles.ring(ringWidthPx = ringWidthPx, contentPadding = contentPadding)
+    }
 
     ColorPickerArea(
         modifier = modifier,
