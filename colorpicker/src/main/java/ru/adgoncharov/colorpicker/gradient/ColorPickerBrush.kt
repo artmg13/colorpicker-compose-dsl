@@ -12,15 +12,6 @@ data class ColorPickerBrush(
 
 @Composable
 fun rememberColorPickerBrush(
-    block: ColorPickerBrushBuilder.() -> Unit
-): ColorPickerBrush {
-    val builder = ColorPickerBrushBuilder()
-    builder.apply(block)
-    return builder.build()
-}
-
-@Composable
-fun rememberColorPickerBrush(
     vararg keys: Any?,
     block: ColorPickerBrushBuilder.() -> Unit
 ): ColorPickerBrush {
