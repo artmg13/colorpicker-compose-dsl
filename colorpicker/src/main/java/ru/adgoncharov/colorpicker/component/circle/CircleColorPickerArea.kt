@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -37,15 +38,18 @@ fun CircleColorPickerArea(
     onValueChangeX: (Float) -> Unit,
     onValueChangeY: (Float) -> Unit,
     brush: ColorPickerBrush,
+    contentPadding: PaddingValues = PaddingValues(),
     reversedX: Boolean = false,
     reversedY: Boolean = false,
     isThumbInside: Boolean = true,
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
-    style: ColorPickerAreaStyle = ColorPickerAreaStyles.circle(),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
     val limiter = remember(isThumbInside) { CircleLimiter(isThumbInside) }
+    val style = remember(contentPadding) {
+        ColorPickerAreaStyles.circle(contentPadding = contentPadding)
+    }
 
     ColorPickerArea(
         modifier = modifier,

@@ -29,11 +29,6 @@ fun VerticalSlider(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    val style = ColorPickerAreaStyles.verticalSlider(
-        shape = config.shape,
-        contentPadding = config.contentPadding
-    )
-
     ru.adgoncharov.colorpicker.component.slider.VerticalSlider(
         modifier = Modifier
             .width(24.dp)
@@ -44,7 +39,8 @@ fun VerticalSlider(
         brush = brush,
         reversed = config.reversed,
         isThumbInside = config.thumbInside,
-        style = style,
+        contentPadding = config.contentPadding,
+        shape = config.shape,
         thumbSize = thumbSize,
         thumb = thumb
     )

@@ -31,8 +31,6 @@ fun HorizontalSlider(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    val style = ColorPickerAreaStyles.horizontalSlider(shape = config.shape, config.contentPadding)
-
     ru.adgoncharov.colorpicker.component.slider.HorizontalSlider(
         modifier = Modifier
             .height(24.dp)
@@ -44,7 +42,8 @@ fun HorizontalSlider(
         reversed = config.reversed,
         isThumbInside = config.thumbInside,
         thumbSize = thumbSize,
-        style = style,
+        contentPadding = config.contentPadding,
+        shape = config.shape,
         thumb = thumb
     )
 }

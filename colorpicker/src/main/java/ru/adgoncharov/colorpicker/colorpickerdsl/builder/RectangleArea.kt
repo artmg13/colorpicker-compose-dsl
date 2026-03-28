@@ -32,11 +32,6 @@ fun RectangleArea(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    val style = ColorPickerAreaStyles.rectangle(
-        shape = config.shape,
-        contentPadding = config.contentPadding
-    )
-
     RectangleColorPickerArea(
         modifier = Modifier
             .then(modifier),
@@ -49,7 +44,8 @@ fun RectangleArea(
         reversedY = config.reversedY,
         isThumbInside = config.thumbInside,
         thumbSize = thumbSize,
-        style = style,
+        contentPadding = config.contentPadding,
+        shape = config.shape,
         thumb = thumb
     )
 }

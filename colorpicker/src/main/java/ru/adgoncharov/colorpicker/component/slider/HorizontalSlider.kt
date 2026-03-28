@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
@@ -31,14 +33,17 @@ fun HorizontalSlider(
     value: Float,
     onValueChange: (Float) -> Unit,
     brush: ColorPickerBrush,
+    contentPadding: PaddingValues = PaddingValues(),
+    shape: Shape = RectangleShape,
     isThumbInside: Boolean = true,
     reversed: Boolean = false,
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
-    style: ColorPickerAreaStyle = ColorPickerAreaStyles.horizontalSlider(),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
-
     val limiter = remember(isThumbInside) { HorizontalSliderLimiter(isThumbInside) }
+    val style = remember(shape, contentPadding) {
+        ColorPickerAreaStyles.horizontalSlider(shape = shape, contentPadding = contentPadding)
+    }
 
     ColorPickerArea(
         modifier = modifier,
@@ -125,9 +130,6 @@ private fun HorizontalSliderPreview() {
             brush = hueBrush,
             isThumbInside = false,
             thumbSize = thumbSize,
-            style = ColorPickerAreaStyles.horizontalSlider(
-                contentPadding = PaddingValues(horizontal = thumbSize.width / 2f)
-            )
         )
 
         Text(

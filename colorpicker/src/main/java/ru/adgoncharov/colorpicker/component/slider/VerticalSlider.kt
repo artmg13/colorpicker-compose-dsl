@@ -12,6 +12,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -30,14 +31,17 @@ fun VerticalSlider(
     value: Float,
     onValueChange: (Float) -> Unit,
     brush: ColorPickerBrush,
+    contentPadding: PaddingValues = PaddingValues(),
+    shape: Shape = RectangleShape,
     isThumbInside: Boolean = true,
     reversed: Boolean = false,
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
-    style: ColorPickerAreaStyle = ColorPickerAreaStyles.horizontalSlider(),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
-
     val limiter = remember(isThumbInside) { VerticalSliderLimiter(isThumbInside) }
+    val style = remember(shape, contentPadding) {
+        ColorPickerAreaStyles.verticalSlider(shape = shape, contentPadding = contentPadding)
+    }
 
     ColorPickerArea(
         modifier = modifier,
@@ -106,9 +110,6 @@ private fun VerticalSliderPreview() {
             brush = hueBrush,
             isThumbInside = false,
             thumbSize = thumbSize,
-            style = ColorPickerAreaStyles.verticalSlider(
-                contentPadding = PaddingValues(vertical = thumbSize.height / 2f)
-            )
         )
 
         VerticalSlider(
@@ -130,10 +131,6 @@ private fun VerticalSliderPreview() {
             brush = hueBrush,
             isThumbInside = true,
             thumbSize = thumbSize,
-            style = ColorPickerAreaStyles.verticalSlider(
-                contentPadding = PaddingValues(vertical = thumbSize.height / 2f),
-                shape = RectangleShape
-            )
         )
     }
 }

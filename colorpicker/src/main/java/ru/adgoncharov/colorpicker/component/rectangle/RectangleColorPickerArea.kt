@@ -2,6 +2,7 @@ package ru.adgoncharov.colorpicker.component.rectangle
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -13,6 +14,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
@@ -35,16 +38,19 @@ fun RectangleColorPickerArea(
     onValueChangeX: (Float) -> Unit,
     onValueChangeY: (Float) -> Unit,
     brush: ColorPickerBrush,
+    contentPadding: PaddingValues = PaddingValues(),
+    shape: Shape = RectangleShape,
     reversedX: Boolean = false,
     reversedY: Boolean = true,
     isThumbInside: Boolean = true,
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
-    style: ColorPickerAreaStyle = ColorPickerAreaStyles.rectangle(),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
     val limiter = remember(isThumbInside) { RectangleLimiter(isThumbInside) }
-
+    val style = remember(shape, contentPadding) {
+        ColorPickerAreaStyles.rectangle(shape = shape, contentPadding = contentPadding)
+    }
     ColorPickerArea(
         modifier = modifier,
         style = style,
@@ -90,9 +96,11 @@ private fun RectangleColorPickerAreaPreview() {
     ) {
 
         HorizontalSlider(
-            modifier = Modifier.fillMaxWidth().height(24.dp),
+            modifier = Modifier
+                .fillMaxWidth()
+                .height(24.dp),
             value = state.hue,
-            onValueChange = {state.changeHue(it)},
+            onValueChange = { state.changeHue(it) },
             brush = hueBrush
         )
 

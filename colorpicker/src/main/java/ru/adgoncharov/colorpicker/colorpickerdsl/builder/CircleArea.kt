@@ -29,8 +29,6 @@ fun CircleArea(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    val style = ColorPickerAreaStyles.circle(contentPadding = config.contentPadding)
-
     CircleColorPickerArea(
         modifier = Modifier
             .then(modifier),
@@ -39,11 +37,11 @@ fun CircleArea(
         onValueChangeX = config.onValueChangeX,
         onValueChangeY = config.onValueChangeY,
         brush = brush,
+        contentPadding = config.contentPadding,
         reversedX = config.reversedX,
         reversedY = config.reversedY,
         isThumbInside = config.thumbInside,
         thumbSize = thumbSize,
-        style = style,
         thumb = thumb
     )
 }
