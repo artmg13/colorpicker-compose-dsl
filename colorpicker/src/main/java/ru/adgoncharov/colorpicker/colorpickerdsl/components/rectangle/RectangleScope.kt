@@ -1,0 +1,13 @@
+package ru.adgoncharov.colorpicker.colorpickerdsl.components.rectangle
+
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
+import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
+import ru.adgoncharov.colorpicker.colorpickerdsl.builder.BaseAreaScope
+
+@ColorPickerDsl
+class SpecificRectangleScope : BaseAreaScope() {
+    var reversedX: Boolean = false
+    var reversedY: Boolean = false
+    var shape: Shape = RectangleShape
+}
