@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
+import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RingLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
@@ -51,11 +51,11 @@ fun RingColorPickerArea(
         ringWidthPx,
         contentPadding
     ) {
-        ColorPickerAreaStyles.ring(ringWidthPx = ringWidthPx, contentPadding = contentPadding)
+        ColorPickerAreaStyle.ring(ringWidthPx = ringWidthPx, contentPadding = contentPadding)
     }
 
     val limiter = remember(ringWidthPx, reversed) {
-        RingLimiter(ringWidthPx = ringWidthPx, reversed)
+        Limiter.ring(ringWidthPx = ringWidthPx, reversed = reversed)
     }
 
     ColorPickerArea(

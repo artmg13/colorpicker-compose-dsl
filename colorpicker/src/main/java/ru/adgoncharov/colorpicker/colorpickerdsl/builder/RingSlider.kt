@@ -16,7 +16,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize

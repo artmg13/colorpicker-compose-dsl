@@ -11,7 +11,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-class RingLimiter(
+internal class RingLimiter(
     private val ringWidthPx: Float,
     val reversed: Boolean = false
 ) : Limiter {

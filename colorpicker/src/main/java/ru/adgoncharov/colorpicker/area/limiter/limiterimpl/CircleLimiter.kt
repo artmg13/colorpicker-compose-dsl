@@ -10,7 +10,7 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
-class CircleLimiter(
+internal class CircleLimiter(
     val isThumbInside: Boolean = true,
     val reversedX: Boolean = false,
     val reversedY: Boolean = false,

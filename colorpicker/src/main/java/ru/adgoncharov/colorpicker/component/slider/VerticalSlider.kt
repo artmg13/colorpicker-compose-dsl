@@ -18,7 +18,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
+import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.VerticalSliderLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
@@ -39,11 +39,11 @@ fun VerticalSlider(
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
     val limiter = remember(isThumbInside, reversed) {
-        VerticalSliderLimiter(isThumbInside, reversed)
+        Limiter.verticalSlider(isThumbInside, reversed)
     }
 
     val style = remember(shape, contentPadding) {
-        ColorPickerAreaStyles.verticalSlider(shape = shape, contentPadding = contentPadding)
+        ColorPickerAreaStyle.verticalSlider(shape = shape, contentPadding = contentPadding)
     }
 
     ColorPickerArea(

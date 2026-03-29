@@ -2,7 +2,6 @@ package ru.adgoncharov.colorpicker.colorpickerdsl.builder
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize

@@ -4,7 +4,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 
-class VerticalSliderLimiter(
+internal class VerticalSliderLimiter(
     private val isThumbInside: Boolean = true,
     val reversed: Boolean = false,
 ) : Limiter {

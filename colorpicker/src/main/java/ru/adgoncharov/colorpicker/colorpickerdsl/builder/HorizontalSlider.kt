@@ -7,7 +7,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize

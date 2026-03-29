@@ -38,7 +38,6 @@ import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.CircleLimiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RingLimiter
@@ -55,7 +54,7 @@ fun ColorPickerArea(
     onValueChangeX: (x: Float) -> Unit = {},
     onValueChangeY: (y: Float) -> Unit = {},
     brush: ColorPickerBrush,
-    limiter: Limiter = CircleLimiter(),
+    limiter: Limiter = Limiter.circle(),
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
     thumb: @Composable () -> Unit = { DefaultThumb() }
 ) {
@@ -207,7 +206,7 @@ private fun ColorPickerAreaPreview() {
                 modifier = Modifier
                     .aspectRatio(1f)
                     .size(400.dp),
-                style = ColorPickerAreaStyles.ring(ringWidthPx = ringWidthPx),
+                style = ColorPickerAreaStyle.ring(ringWidthPx = ringWidthPx),
                 valueX = x,
                 valueY = 0f,
                 onValueChangeX = { x = it },

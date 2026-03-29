@@ -8,7 +8,6 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.ColorPickerState
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 

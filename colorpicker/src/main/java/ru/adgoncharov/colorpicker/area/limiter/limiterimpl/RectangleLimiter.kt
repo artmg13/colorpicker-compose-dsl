@@ -4,7 +4,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 
-class RectangleLimiter(
+internal class RectangleLimiter(
     private val isThumbInside: Boolean = true,
     val reversedX: Boolean = false,
     val reversedY: Boolean = true,

@@ -23,7 +23,7 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
-import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyles
+import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.CircleLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
@@ -47,10 +47,10 @@ fun CircleColorPickerArea(
 ) {
 
     val limiter = remember(isThumbInside, reversedX, reversedY) {
-        CircleLimiter(isThumbInside, reversedX, reversedY)
+        Limiter.circle(isThumbInside, reversedX, reversedY)
     }
     val style = remember(contentPadding) {
-        ColorPickerAreaStyles.circle(contentPadding = contentPadding)
+        ColorPickerAreaStyle.circle(contentPadding = contentPadding)
     }
 
     ColorPickerArea(
