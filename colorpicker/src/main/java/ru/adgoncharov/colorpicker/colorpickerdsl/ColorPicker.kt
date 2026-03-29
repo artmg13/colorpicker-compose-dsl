@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.DpSize
@@ -18,7 +19,7 @@ fun ColorPicker(
     state: ColorPickerState = rememberColorPickerState(),
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
     thumbColor: Color = Color.White,
-    thumb: @Composable (Color) -> Unit = { color -> DefaultThumb(color) },
+    thumb: @Composable (Color) -> Unit = remember { { color -> DefaultThumb(color) } },
     content: @Composable ColumnScope.() -> Unit
 ) {
     CompositionLocalProvider(

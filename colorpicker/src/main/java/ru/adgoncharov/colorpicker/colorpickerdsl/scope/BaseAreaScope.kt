@@ -14,5 +14,5 @@ abstract class BaseAreaScope {
 
     var thumbSize: DpSize? = null
     var thumbColor: Color? = null
-    var thumb: (@Composable () -> Unit)? = null
+    var thumb: (@Composable (Color) -> Unit)? = null
 }

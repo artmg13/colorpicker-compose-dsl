@@ -31,9 +31,9 @@ fun VerticalSlider(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumbColor = config.thumbColor ?: LocalThumbColor.current
 
-    val globalThumbRenderer = LocalColorPickerThumb.current
-    val thumb = config.thumb ?: remember(thumbColor, globalThumbRenderer) {
-        @Composable { globalThumbRenderer(thumbColor) }
+    val thumbRenderer =  config.thumb ?: LocalColorPickerThumb.current
+    val thumb = remember(thumbColor, thumbRenderer) {
+        @Composable { thumbRenderer(thumbColor) }
     }
 
     VerticalSlider(

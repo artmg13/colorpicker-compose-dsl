@@ -54,8 +54,14 @@ fun SliderColorPicker(
             verticalArrangement = Arrangement.spacedBy(gap),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+
+            val hueThumb = remember {
+                @Composable { color: Color -> DefaultThumb(color) }
+            }
+
             HueSlider {
                 shape = sliderShape
+                thumb = hueThumb
             }
             SaturationSlider {
                 shape = sliderShape
