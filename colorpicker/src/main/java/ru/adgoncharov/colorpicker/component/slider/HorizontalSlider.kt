@@ -40,7 +40,9 @@ fun HorizontalSlider(
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
-    val limiter = remember(isThumbInside) { HorizontalSliderLimiter(isThumbInside) }
+    val limiter = remember(isThumbInside, reversed) {
+        HorizontalSliderLimiter(isThumbInside, reversed)
+    }
     val style = remember(shape, contentPadding) {
         ColorPickerAreaStyles.horizontalSlider(shape = shape, contentPadding = contentPadding)
     }
@@ -48,14 +50,9 @@ fun HorizontalSlider(
     ColorPickerArea(
         modifier = modifier,
         style = style,
-        valueX = if (reversed) 1f - value else value,
+        valueX = value,
         valueY = 0f,
-        onValueChangeX = { newValue ->
-            if (reversed)
-                onValueChange(1f - newValue)
-            else
-                onValueChange(newValue)
-        },
+        onValueChangeX = onValueChange,
         onValueChangeY = {},
         brush = brush,
         limiter = limiter,
@@ -117,7 +114,7 @@ private fun HorizontalSliderPreview() {
 
         Text(
             modifier = Modifier.fillMaxWidth(),
-            text = "isThumbInside = false and ContentPadding = thumbSize.width / 2f HorizontalSlider",
+            text = "isThumbInside = false and ContentPadding = thumbSize.width / 2 HorizontalSlider",
             textAlign = TextAlign.Center
         )
 
@@ -129,6 +126,7 @@ private fun HorizontalSliderPreview() {
             onValueChange = { colorPickerState.changeHue(it) },
             brush = hueBrush,
             isThumbInside = false,
+            contentPadding = PaddingValues(horizontal = thumbSize.width / 2),
             thumbSize = thumbSize,
         )
 

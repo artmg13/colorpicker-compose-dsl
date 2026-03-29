@@ -11,7 +11,9 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 class CircleLimiter(
-    val isThumbInside: Boolean = true
+    val isThumbInside: Boolean = true,
+    val reversedX: Boolean = false,
+    val reversedY: Boolean = false,
 ) : Limiter {
 
     override fun limitPosition(
@@ -46,8 +48,8 @@ class CircleLimiter(
         val normalizedRadius = countNormalizedRadius(distance, radius)
 
         return Offset(
-            x = normalizedAngleDeg, // градусы 0..1
-            y = normalizedRadius // радиус от 0..1
+            x = if (reversedX) 1f - normalizedAngleDeg else normalizedAngleDeg, // градусы 0..1
+            y = if (reversedY) 1f - normalizedRadius else normalizedRadius // радиус от 0..1
         )
     }
 
@@ -60,10 +62,13 @@ class CircleLimiter(
         val radius = countRadius(sliderSize, thumbSize)
         val center = countCenter(sliderSize, thumbSize)
 
-        val angle = valueX * 2f * PI.toFloat()
+        val valX = if (reversedX) 1f - valueX else valueX
+        val valY = if (reversedY) 1f - valueY else valueY
 
-        val x = valueY * radius * cos(angle)
-        val y = -valueY * radius * sin(angle) // экранная инверсия
+        val angle = valX * 2f * PI.toFloat()
+
+        val x = valY * radius * cos(angle)
+        val y = -valY * radius * sin(angle) // экранная инверсия
 
         return Offset(x = center.x + x, y = center.y + y)
     }

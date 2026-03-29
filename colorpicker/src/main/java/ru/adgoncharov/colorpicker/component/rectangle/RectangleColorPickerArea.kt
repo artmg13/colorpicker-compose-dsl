@@ -41,33 +41,25 @@ fun RectangleColorPickerArea(
     contentPadding: PaddingValues = PaddingValues(),
     shape: Shape = RectangleShape,
     reversedX: Boolean = false,
-    reversedY: Boolean = true,
+    reversedY: Boolean = false,
     isThumbInside: Boolean = true,
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
-    val limiter = remember(isThumbInside) { RectangleLimiter(isThumbInside) }
+    val limiter = remember(isThumbInside, reversedX, reversedY) {
+        RectangleLimiter(isThumbInside, reversedX, reversedY)
+    }
     val style = remember(shape, contentPadding) {
         ColorPickerAreaStyles.rectangle(shape = shape, contentPadding = contentPadding)
     }
     ColorPickerArea(
         modifier = modifier,
         style = style,
-        valueX = if (reversedX) 1f - valueX else valueX,
-        valueY = if (reversedY) 1f - valueY else valueY,
-        onValueChangeX = { newX ->
-            if (reversedX)
-                onValueChangeX(1f - newX)
-            else
-                onValueChangeX(newX)
-        },
-        onValueChangeY = { newY ->
-            if (reversedY)
-                onValueChangeY(1f - newY)
-            else
-                onValueChangeY(newY)
-        },
+        valueX = valueX,
+        valueY = valueY,
+        onValueChangeX = onValueChangeX,
+        onValueChangeY = onValueChangeY,
         brush = brush,
         limiter = limiter,
         thumbSize = thumbSize,

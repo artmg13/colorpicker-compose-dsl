@@ -38,7 +38,10 @@ fun VerticalSlider(
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
-    val limiter = remember(isThumbInside) { VerticalSliderLimiter(isThumbInside) }
+    val limiter = remember(isThumbInside, reversed) {
+        VerticalSliderLimiter(isThumbInside, reversed)
+    }
+
     val style = remember(shape, contentPadding) {
         ColorPickerAreaStyles.verticalSlider(shape = shape, contentPadding = contentPadding)
     }
@@ -47,14 +50,9 @@ fun VerticalSlider(
         modifier = modifier,
         style = style,
         valueX = 0f,
-        valueY = if (reversed) 1f - value else value,
+        valueY = value,
         onValueChangeX = { },
-        onValueChangeY = { newValue ->
-            if (reversed)
-                onValueChange(1f - newValue)
-            else
-                onValueChange(newValue)
-        },
+        onValueChangeY = onValueChange,
         brush = brush,
         limiter = limiter,
         thumbSize = thumbSize,

@@ -5,7 +5,9 @@ import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 
 class RectangleLimiter(
-    private val isThumbInside: Boolean = true
+    private val isThumbInside: Boolean = true,
+    val reversedX: Boolean = false,
+    val reversedY: Boolean = true,
 ) : Limiter {
 
     override fun limitPosition(
@@ -60,8 +62,8 @@ class RectangleLimiter(
         val normY = normalize(position.y, minY, maxY)
 
         return Offset(
-            x = normX,
-            y = 1f - normY // инверсия Y как у тебя
+            x = if (reversedX) 1f - normX else normX,
+            y = if (reversedY) normY else 1f - normY // инверсия Y как у тебя
         )
     }
 
@@ -90,8 +92,11 @@ class RectangleLimiter(
             -thumbH / 2f to (height - thumbH / 2f)
         }
 
-        val x = denormalize(valueX, minX, maxX)
-        val y = denormalize(1f - valueY, minY, maxY)
+        val valX = if (reversedX) 1f - valueX else valueX
+        val valY = if (reversedY) valueY else 1f - valueY
+
+        val x = denormalize(valX, minX, maxX)
+        val y = denormalize(valY, minY, maxY)
 
         return Offset(x, y)
     }

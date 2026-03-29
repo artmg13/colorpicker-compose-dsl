@@ -46,7 +46,9 @@ fun CircleColorPickerArea(
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
-    val limiter = remember(isThumbInside) { CircleLimiter(isThumbInside) }
+    val limiter = remember(isThumbInside, reversedX, reversedY) {
+        CircleLimiter(isThumbInside, reversedX, reversedY)
+    }
     val style = remember(contentPadding) {
         ColorPickerAreaStyles.circle(contentPadding = contentPadding)
     }
@@ -54,20 +56,10 @@ fun CircleColorPickerArea(
     ColorPickerArea(
         modifier = modifier,
         style = style,
-        valueX = if (reversedX) 1f - valueX else valueX,
-        valueY = if (reversedY) 1f - valueY else valueY,
-        onValueChangeX = { newX ->
-            if (reversedX)
-                onValueChangeX(1f - newX)
-            else
-                onValueChangeX(newX)
-        },
-        onValueChangeY = { newY ->
-            if (reversedY)
-                onValueChangeY(1f - newY)
-            else
-                onValueChangeY(newY)
-        },
+        valueX = valueX,
+        valueY = valueY,
+        onValueChangeX = onValueChangeX,
+        onValueChangeY = onValueChangeY,
         brush = brush,
         limiter = limiter,
         thumbSize = thumbSize,
@@ -115,6 +107,8 @@ private fun CircleColorPickerAreaPreview() {
             valueY = state.saturation,
             onValueChangeX = { state.changeHue(it) },
             onValueChangeY = { state.changeSaturation(it) },
+            reversedX = true,
+            reversedY = true,
             brush = brush,
         )
 

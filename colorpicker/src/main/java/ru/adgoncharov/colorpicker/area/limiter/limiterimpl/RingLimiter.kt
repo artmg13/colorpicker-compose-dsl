@@ -12,7 +12,8 @@ import kotlin.math.sin
 import kotlin.math.sqrt
 
 class RingLimiter(
-    private val ringWidthPx: Float
+    private val ringWidthPx: Float,
+    val reversed: Boolean = false
 ) : Limiter {
 
     override fun limitPosition(
@@ -54,7 +55,7 @@ class RingLimiter(
         val normalized = ((angle / (2 * PI)) + 1f).toFloat() % 1f
 
         return Offset(
-            x = normalized,
+            x = if (reversed) 1f - normalized else normalized,
             y = 0f
         )
     }
@@ -70,7 +71,8 @@ class RingLimiter(
 
         val radius = countRingRadius(sliderSize, thumbSize)
 
-        val angle = valueX * 2f * PI.toFloat()
+        val valX = if (reversed) 1f - valueX else valueX
+        val angle = valX * 2f * PI.toFloat()
 
         val x = radius * cos(angle)
         val y = -radius * sin(angle)

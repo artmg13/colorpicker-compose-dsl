@@ -5,7 +5,8 @@ import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 
 class VerticalSliderLimiter(
-    private val isThumbInside: Boolean = true
+    private val isThumbInside: Boolean = true,
+    val reversed: Boolean = false,
 ) : Limiter {
 
     override fun limitPosition(
@@ -47,7 +48,7 @@ class VerticalSliderLimiter(
 
         return Offset(
             x = 0f, // 🔥 снизу вверх = 0 → 1
-            y = 1f - normalized
+            y = if (reversed) normalized else 1f - normalized,
         )
     }
 
@@ -69,7 +70,8 @@ class VerticalSliderLimiter(
             -thumb / 2f to (height - thumb / 2f)
         }
 
-        val y = denormalize(value, min, max)
+        val valY = if (reversed) 1f - value else value
+        val y = denormalize(valY, min, max)
         val x = (sliderSize.width - thumbSize.width) / 2f
 
         return Offset(x, y)

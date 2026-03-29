@@ -45,10 +45,8 @@ fun RingColorPickerArea(
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
-
     val density = LocalDensity.current
     val ringWidthPx = with(density) { ringWidth.toPx() }
-    val limiter = remember(ringWidthPx) { RingLimiter(ringWidthPx = ringWidthPx) }
     val style = remember(
         ringWidthPx,
         contentPadding
@@ -56,17 +54,16 @@ fun RingColorPickerArea(
         ColorPickerAreaStyles.ring(ringWidthPx = ringWidthPx, contentPadding = contentPadding)
     }
 
+    val limiter = remember(ringWidthPx, reversed) {
+        RingLimiter(ringWidthPx = ringWidthPx, reversed)
+    }
+
     ColorPickerArea(
         modifier = modifier,
         style = style,
-        valueX = if (reversed) 1f - value else value,
+        valueX = value,
         valueY = 0f,
-        onValueChangeX = { newX ->
-            if (reversed)
-                onValueChange(1f - newX)
-            else
-                onValueChange(newX)
-        },
+        onValueChangeX = onValueChange,
         onValueChangeY = { },
         brush = brush,
         limiter = limiter,
