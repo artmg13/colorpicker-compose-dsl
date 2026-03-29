@@ -1,7 +1,7 @@
 package ru.adgoncharov.colorpicker.colorpickerdsl.components.circle
 
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
-import ru.adgoncharov.colorpicker.colorpickerdsl.builder.BaseAreaScope
+import ru.adgoncharov.colorpicker.colorpickerdsl.scope.BaseAreaScope
 
 @ColorPickerDsl
 class SpecificCircleScope() : BaseAreaScope() {

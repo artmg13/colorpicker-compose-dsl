@@ -3,6 +3,7 @@ package ru.adgoncharov.colorpicker.colorpickerdsl
 import android.graphics.drawable.shapes.Shape
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.compositionLocalOf
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
@@ -20,5 +21,9 @@ val LocalThumbSize = compositionLocalOf {
 }
 
 val LocalColorPickerThumb = compositionLocalOf<@Composable () -> Unit> {
-    { DefaultThumb() }
+    { DefaultThumb() } // По умолчанию наш стандартный
 }
+
+//val LocalColorPickerThumb = compositionLocalOf<@Composable (Color) -> Unit> {
+//    { color -> DefaultThumb(color) } // По умолчанию наш стандартный
+//}

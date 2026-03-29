@@ -3,7 +3,7 @@ package ru.adgoncharov.colorpicker.colorpickerdsl.components.ring
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
-import ru.adgoncharov.colorpicker.colorpickerdsl.builder.RingSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.scope.RingSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 
 @Composable

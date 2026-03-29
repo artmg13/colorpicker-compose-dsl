@@ -4,7 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
-import ru.adgoncharov.colorpicker.colorpickerdsl.builder.VerticalSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.scope.VerticalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 
 @Composable

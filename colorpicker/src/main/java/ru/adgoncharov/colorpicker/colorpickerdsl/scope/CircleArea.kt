@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.builder
+package ru.adgoncharov.colorpicker.colorpickerdsl.scope
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier

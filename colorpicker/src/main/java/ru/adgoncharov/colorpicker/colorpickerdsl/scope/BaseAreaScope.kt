@@ -1,8 +1,7 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.builder
+package ru.adgoncharov.colorpicker.colorpickerdsl.scope
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl

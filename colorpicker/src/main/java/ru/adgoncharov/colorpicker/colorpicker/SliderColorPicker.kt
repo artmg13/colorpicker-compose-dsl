@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -52,36 +53,43 @@ fun SliderColorPicker(
             verticalArrangement = Arrangement.spacedBy(gap),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val hueThumb = remember(state.hue) {
+                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, 1f, 1f)) }
+            }
+
+            val saturationThumb = remember(state.hue, state.saturation) {
+                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, state.saturation, 1f)) }
+            }
+
+            val valueThumb = remember(state.color) {
+                @Composable { ColoredThumb(state.color) }
+            }
+
+            val alphaThumb = remember(state.color) {
+                @Composable { ColoredThumb(state.color.copy(alpha = 1f)) }
+            }
+
             HueSlider {
                 shape = sliderShape
-                thumb = {
-                    ColoredThumb(Color.hsv(state.hue * 360f, 1f, 1f))
-                }
+                thumb = hueThumb
             }
             SaturationSlider {
                 shape = sliderShape
-                thumb = {
-                    ColoredThumb(Color.hsv(state.hue * 360f, state.saturation, 1f))
-                }
+                thumb = saturationThumb
             }
             ValueSlider {
                 shape = sliderShape
-                thumb = {
-                    ColoredThumb(state.color)
-                }
+                thumb = valueThumb
             }
             if (showAlpha) {
                 AlphaSlider {
                     shape = sliderShape
-                    thumb = {
-                        ColoredThumb(state.color.copy(alpha = 1f))
-                    }
+                    thumb = alphaThumb
                 }
             }
         }
     }
 }
-
 
 
 @Preview(

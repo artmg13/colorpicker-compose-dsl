@@ -3,7 +3,7 @@ package ru.adgoncharov.colorpicker.colorpickerdsl.components.slider
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
-import ru.adgoncharov.colorpicker.colorpickerdsl.builder.BaseAreaScope
+import ru.adgoncharov.colorpicker.colorpickerdsl.scope.BaseAreaScope
 
 @ColorPickerDsl
 class SpecificSliderScope : BaseAreaScope() {

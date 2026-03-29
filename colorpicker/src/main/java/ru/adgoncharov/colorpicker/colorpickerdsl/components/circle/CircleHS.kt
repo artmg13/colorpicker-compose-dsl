@@ -3,7 +3,7 @@ package ru.adgoncharov.colorpicker.colorpickerdsl.components.circle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
-import ru.adgoncharov.colorpicker.colorpickerdsl.builder.CircleArea
+import ru.adgoncharov.colorpicker.colorpickerdsl.scope.CircleArea
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 
 @Composable
