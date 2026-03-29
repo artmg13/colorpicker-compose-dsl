@@ -1,9 +1,11 @@
 package ru.adgoncharov.colorpicker.colorpickerdsl.scope
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
+import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbColor
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
 import ru.adgoncharov.colorpicker.component.CircleColorPickerArea
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
@@ -26,7 +28,12 @@ fun CircleArea(
 ) {
     val config = CircleAreaScope().apply(block)
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
-    val thumb = config.thumb ?: LocalColorPickerThumb.current
+    val thumbColor = config.thumbColor ?: LocalThumbColor.current
+
+    val globalThumbRenderer = LocalColorPickerThumb.current
+    val thumb = config.thumb ?: remember(thumbColor, globalThumbRenderer) {
+        @Composable { globalThumbRenderer(thumbColor) }
+    }
 
     CircleColorPickerArea(
         modifier = Modifier

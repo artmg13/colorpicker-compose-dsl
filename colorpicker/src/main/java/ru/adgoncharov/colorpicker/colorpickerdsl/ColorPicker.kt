@@ -17,12 +17,14 @@ fun ColorPicker(
     modifier: Modifier = Modifier,
     state: ColorPickerState = rememberColorPickerState(),
     thumbSize: DpSize = DpSize(24.dp, 24.dp),
-    thumb: @Composable () -> Unit = { DefaultThumb() },
+    thumbColor: Color = Color.White,
+    thumb: @Composable (Color) -> Unit = { color -> DefaultThumb(color) },
     content: @Composable ColumnScope.() -> Unit
 ) {
     CompositionLocalProvider(
         LocalColorPickerState provides state,
         LocalThumbSize provides thumbSize,
+        LocalThumbColor provides thumbColor,
         LocalColorPickerThumb provides thumb,
     ) {
         Column(

@@ -41,14 +41,12 @@ fun CircleColorPicker(
     circleThumbSize: DpSize = DpSize(24.dp, 24.dp),
     sliderShape: Shape = CircleShape,
     sliderThumbSize: DpSize = DpSize(24.dp, 24.dp),
-    sliderThumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
     ColorPicker(
         modifier = modifier,
         state = state,
         thumbSize = sliderThumbSize,
-        thumb = sliderThumb,
     ) {
         Column(
             modifier = Modifier.width(IntrinsicSize.Min),

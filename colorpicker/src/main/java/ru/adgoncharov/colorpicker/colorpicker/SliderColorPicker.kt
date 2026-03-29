@@ -34,6 +34,7 @@ import ru.adgoncharov.colorpicker.rememberColorPickerState
 import ru.adgoncharov.colorpicker.thumb.ColoredThumb
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
+
 @Composable
 fun SliderColorPicker(
     modifier: Modifier = Modifier,
@@ -53,43 +54,80 @@ fun SliderColorPicker(
             verticalArrangement = Arrangement.spacedBy(gap),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            val hueThumb = remember(state.hue) {
-                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, 1f, 1f)) }
-            }
-
-            val saturationThumb = remember(state.hue, state.saturation) {
-                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, state.saturation, 1f)) }
-            }
-
-            val valueThumb = remember(state.color) {
-                @Composable { ColoredThumb(state.color) }
-            }
-
-            val alphaThumb = remember(state.color) {
-                @Composable { ColoredThumb(state.color.copy(alpha = 1f)) }
-            }
-
             HueSlider {
                 shape = sliderShape
-                thumb = hueThumb
             }
             SaturationSlider {
                 shape = sliderShape
-                thumb = saturationThumb
             }
             ValueSlider {
                 shape = sliderShape
-                thumb = valueThumb
             }
             if (showAlpha) {
                 AlphaSlider {
                     shape = sliderShape
-                    thumb = alphaThumb
                 }
             }
         }
     }
 }
+
+//@Composable
+//fun SliderColorPicker(
+//    modifier: Modifier = Modifier,
+//    state: ColorPickerState,
+//    gap: Dp = 8.dp,
+//    showAlpha: Boolean = false,
+//    sliderShape: Shape = RectangleShape,
+//    thumbSize: DpSize = DpSize(24.dp, 24.dp),
+//) {
+//
+//    ColorPicker(
+//        modifier = modifier,
+//        state = state,
+//        thumbSize = thumbSize,
+//    ) {
+//        Column(
+//            verticalArrangement = Arrangement.spacedBy(gap),
+//            horizontalAlignment = Alignment.CenterHorizontally
+//        ) {
+//            val hueThumb = remember(state.hue) {
+//                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, 1f, 1f)) }
+//            }
+//
+//            val saturationThumb = remember(state.hue, state.saturation) {
+//                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, state.saturation, 1f)) }
+//            }
+//
+//            val valueThumb = remember(state.color.copy(1f)) {
+//                @Composable { ColoredThumb(state.color.copy(1f)) }
+//            }
+//
+//            val alphaThumb = remember(state.color) {
+//                @Composable { ColoredThumb(state.color.copy(alpha = 1f)) }
+//            }
+//
+//            HueSlider {
+//                shape = sliderShape
+//                thumb = hueThumb
+//            }
+//            SaturationSlider {
+//                shape = sliderShape
+//                thumb = saturationThumb
+//            }
+//            ValueSlider {
+//                shape = sliderShape
+//                thumb = valueThumb
+//            }
+//            if (showAlpha) {
+//                AlphaSlider {
+//                    shape = sliderShape
+//                    thumb = alphaThumb
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 @Preview(

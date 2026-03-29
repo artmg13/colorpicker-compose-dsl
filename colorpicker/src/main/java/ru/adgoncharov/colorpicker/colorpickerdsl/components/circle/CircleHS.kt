@@ -1,7 +1,9 @@
 package ru.adgoncharov.colorpicker.colorpickerdsl.components.circle
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.CircleArea
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
@@ -14,6 +16,10 @@ fun CircleHS(
     val config = SpecificCircleScope().apply(block)
 
     val state = LocalColorPickerState.current
+
+    val defaultColor = remember(state.hue, state.saturation) {
+        Color.hsv(state.hue * 360f, state.saturation, 1f)
+    }
 
     val brush = ColorPickerBrushes.hsCircle(
         !config.reversedX,
@@ -30,6 +36,7 @@ fun CircleHS(
         this.thumbInside = config.thumbInside
         this.contentPadding = config.contentPadding
         this.thumbSize = config.thumbSize
+        this.thumbColor = config.thumbColor ?: defaultColor
         this.thumb = config.thumb
     }
 }

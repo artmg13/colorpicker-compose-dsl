@@ -38,7 +38,6 @@ fun RingColorPicker(
     rectangleThumbSize: DpSize = DpSize(24.dp, 24.dp),
     alphaSliderShape: Shape = CircleShape,
     alphaSliderThumbSize: DpSize = DpSize(24.dp, 24.dp),
-    alphaSliderThumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
 
     ColorPicker(
@@ -76,6 +75,7 @@ fun RingColorPicker(
             }
 
             if (showAlpha) {
+
                 AlphaSlider(
                     modifier = Modifier
                         .border(
@@ -86,7 +86,6 @@ fun RingColorPicker(
                 ) {
                     shape = alphaSliderShape
                     thumbSize = alphaSliderThumbSize
-                    thumb = alphaSliderThumb
                 }
             }
         }

@@ -3,12 +3,15 @@ package ru.adgoncharov.colorpicker.colorpickerdsl.scope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
+import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbColor
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
 import ru.adgoncharov.colorpicker.component.HorizontalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
@@ -29,7 +32,12 @@ fun HorizontalSlider(
 ) {
     val config = HorizontalSliderScope().apply(block)
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
-    val thumb = config.thumb ?: LocalColorPickerThumb.current
+    val thumbColor = config.thumbColor ?: LocalThumbColor.current
+
+    val globalThumbRenderer = LocalColorPickerThumb.current
+    val thumb = config.thumb ?: remember(thumbColor, globalThumbRenderer) {
+        @Composable { globalThumbRenderer(thumbColor) }
+    }
 
     HorizontalSlider(
         modifier = Modifier

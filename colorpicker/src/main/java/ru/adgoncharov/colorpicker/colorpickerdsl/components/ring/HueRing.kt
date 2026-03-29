@@ -1,7 +1,9 @@
 package ru.adgoncharov.colorpicker.colorpickerdsl.components.ring
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.RingSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
@@ -13,6 +15,10 @@ fun HueRing(
 ) {
     val config = SpecificRingScope().apply(block)
     val state = LocalColorPickerState.current
+
+    val defaultColor = remember(state.hue) {
+        Color.hsv(state.hue * 360f, 1f, 1f)
+    }
 
     val brush = ColorPickerBrushes.hueRing(!config.reversed)
 
@@ -27,6 +33,7 @@ fun HueRing(
         this.contentInside = config.contentInside
         this.thumbInside = config.thumbInside
         this.thumbSize = config.thumbSize
+        this.thumbColor = config.thumbColor ?: defaultColor
         this.thumb = config.thumb
     }
 }

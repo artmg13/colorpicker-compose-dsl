@@ -1,11 +1,13 @@
 package ru.adgoncharov.colorpicker.colorpickerdsl.scope
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
+import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbColor
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
 import ru.adgoncharov.colorpicker.component.RectangleColorPickerArea
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
@@ -29,7 +31,12 @@ fun RectangleArea(
 ) {
     val config = RectangleAreaScope().apply(block)
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
-    val thumb = config.thumb ?: LocalColorPickerThumb.current
+    val thumbColor = config.thumbColor ?: LocalThumbColor.current
+
+    val globalThumbRenderer = LocalColorPickerThumb.current
+    val thumb = config.thumb ?: remember(thumbColor, globalThumbRenderer) {
+        @Composable { globalThumbRenderer(thumbColor) }
+    }
 
     RectangleColorPickerArea(
         modifier = Modifier

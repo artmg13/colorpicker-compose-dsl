@@ -20,10 +20,10 @@ val LocalThumbSize = compositionLocalOf {
     DpSize(24.dp, 24.dp)
 }
 
-val LocalColorPickerThumb = compositionLocalOf<@Composable () -> Unit> {
-    { DefaultThumb() } // По умолчанию наш стандартный
+val LocalThumbColor = compositionLocalOf {
+    Color.White
 }
 
-//val LocalColorPickerThumb = compositionLocalOf<@Composable (Color) -> Unit> {
-//    { color -> DefaultThumb(color) } // По умолчанию наш стандартный
-//}
+val LocalColorPickerThumb = compositionLocalOf<@Composable (Color) -> Unit> {
+    { color -> DefaultThumb(color) } // По умолчанию наш стандартный
+}

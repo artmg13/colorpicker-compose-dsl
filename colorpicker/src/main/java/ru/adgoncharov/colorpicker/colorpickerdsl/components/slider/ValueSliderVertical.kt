@@ -1,6 +1,7 @@
 package ru.adgoncharov.colorpicker.colorpickerdsl.components.slider
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
@@ -16,6 +17,10 @@ fun ValueSliderVertical(
 
     val state = LocalColorPickerState.current
 
+    val defaultColor = remember(state.hue, state.saturation, state.value) {
+        state.color.copy(alpha = 1f)
+    }
+
     val brush = ColorPickerBrushes.valueVerticalSlider(
         Color.hsv(state.hue * 360f, state.saturation, 1f),
         !config.reversed
@@ -29,6 +34,7 @@ fun ValueSliderVertical(
         this.contentPadding = config.contentPadding
         this.thumbInside = config.thumbInside
         this.thumbSize = config.thumbSize
+        this.thumbColor = config.thumbColor ?: defaultColor
         this.thumb = config.thumb
     }
 }
