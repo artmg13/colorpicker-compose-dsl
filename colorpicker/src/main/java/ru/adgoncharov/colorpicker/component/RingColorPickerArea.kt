@@ -28,7 +28,6 @@ import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 import ru.adgoncharov.colorpicker.rememberColorPickerState
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
@@ -79,8 +78,8 @@ fun RingColorPickerArea(
 private fun RingColorPickerAreaPreview() {
     val state = rememberColorPickerState()
 
-    val brush = ColorPickerBrushes.hueRing()
-    val brush2 = ColorPickerBrushes.hueRing(reversed = false)
+    val brush = ColorPickerBrush.hueRing()
+    val brush2 = ColorPickerBrush.hueRing(reversed = false)
 
     Column(
         modifier = Modifier

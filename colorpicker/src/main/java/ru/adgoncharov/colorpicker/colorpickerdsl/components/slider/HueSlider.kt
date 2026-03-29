@@ -13,8 +13,9 @@ import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbColor
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.HorizontalSlider
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.HorizontalSliderScope
+import ru.adgoncharov.colorpicker.colorpickerdsl.scope.VerticalSlider
 import ru.adgoncharov.colorpicker.component.HorizontalSlider
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
+import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 @Composable
@@ -30,9 +31,37 @@ fun HueSlider(
         Color.hsv(state.hue * 360f, 1f, 1f)
     }
 
-    val brush = ColorPickerBrushes.hueHorizontalSlider(config.reversed)
+    val brush = ColorPickerBrush.hueHorizontalSlider(config.reversed)
 
     HorizontalSlider(modifier, brush) {
+        value = state.hue
+        onValueChange = state::changeHue
+        this.reversed = config.reversed
+        this.shape = config.shape
+        this.contentPadding = config.contentPadding
+        this.thumbInside = config.thumbInside
+        this.thumbSize = config.thumbSize
+        this.thumbColor = config.thumbColor ?: defaultColor
+        this.thumb = config.thumb
+    }
+}
+
+@Composable
+fun HueSliderVertical(
+    modifier: Modifier = Modifier,
+    block: SpecificSliderScope.() -> Unit,
+) {
+    val config = SpecificSliderScope().apply(block)
+
+    val state = LocalColorPickerState.current
+
+    val defaultColor = remember(state.hue) {
+        Color.hsv(state.hue * 360f, 1f, 1f)
+    }
+
+    val brush = ColorPickerBrush.hueVerticalSlider(!config.reversed)
+
+    VerticalSlider(modifier, brush) {
         value = state.hue
         onValueChange = state::changeHue
         this.reversed = config.reversed

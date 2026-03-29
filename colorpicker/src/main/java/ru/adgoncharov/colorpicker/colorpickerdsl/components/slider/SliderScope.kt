@@ -6,13 +6,7 @@ import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.BaseAreaScope
 
 @ColorPickerDsl
-class SpecificSliderScope : BaseAreaScope() {
-    var reversed: Boolean = false
-    var shape: Shape = RectangleShape
-}
-
-@ColorPickerDsl
-class SpecificSliderVerticalScope : BaseAreaScope() {
+open class SpecificSliderScope : BaseAreaScope() {
     var reversed: Boolean = false
     var shape: Shape = RectangleShape
 }

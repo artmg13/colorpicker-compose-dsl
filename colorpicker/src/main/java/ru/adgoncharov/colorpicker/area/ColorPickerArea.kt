@@ -43,7 +43,6 @@ import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.CircleLimiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RectangleLimiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RingLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 @Composable
@@ -162,7 +161,7 @@ private fun ColorPickerAreaPreview() {
     var x by remember { mutableStateOf(0f) }
     var y by remember { mutableStateOf(0f) }
 
-    val brush = ColorPickerBrushes.hueRing()
+    val brush = ColorPickerBrush.hueRing()
     val limiter = remember(ringWidthPx) { RingLimiter(ringWidthPx) }
 
     Column(

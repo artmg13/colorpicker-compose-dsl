@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.RingSlider
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
+import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 @Composable
 fun HueRing(
@@ -20,7 +20,7 @@ fun HueRing(
         Color.hsv(state.hue * 360f, 1f, 1f)
     }
 
-    val brush = ColorPickerBrushes.hueRing(!config.reversed)
+    val brush = ColorPickerBrush.hueRing(!config.reversed)
 
     RingSlider(modifier, brush) {
         value = state.hue

@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.CircleArea
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
+import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 @Composable
 fun CircleHS(
@@ -21,7 +21,7 @@ fun CircleHS(
         Color.hsv(state.hue * 360f, state.saturation, 1f)
     }
 
-    val brush = ColorPickerBrushes.hsCircle(
+    val brush = ColorPickerBrush.circleHS(
         !config.reversedX,
         config.reversedY
     )

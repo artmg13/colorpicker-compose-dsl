@@ -24,7 +24,6 @@ import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 import ru.adgoncharov.colorpicker.rememberColorPickerState
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
@@ -73,9 +72,9 @@ private fun RectangleColorPickerAreaPreview() {
 
     val state = rememberColorPickerState()
 
-    val hueBrush = ColorPickerBrushes.hueHorizontalSlider()
+    val hueBrush = ColorPickerBrush.hueHorizontalSlider()
 
-    val brush = ColorPickerBrushes.svRectangle(baseColor = Color.hsv(state.hue * 360f, 1f, 1f))
+    val brush = ColorPickerBrush.rectangleSV(baseColor = Color.hsv(state.hue * 360f, 1f, 1f))
 
     Column(
         modifier = Modifier

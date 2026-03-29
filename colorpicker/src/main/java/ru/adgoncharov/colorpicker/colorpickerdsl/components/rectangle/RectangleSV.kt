@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.RectangleArea
-import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
+import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 @Composable
 fun RectangleSV(
@@ -21,7 +21,7 @@ fun RectangleSV(
         state.color.copy(alpha = 1f)
     }
 
-    val brush = ColorPickerBrushes.svRectangle(
+    val brush = ColorPickerBrush.rectangleSV(
         Color.hsv(state.hue * 360f, 1f, 1f),
         config.reversedX,
         !config.reversedY
