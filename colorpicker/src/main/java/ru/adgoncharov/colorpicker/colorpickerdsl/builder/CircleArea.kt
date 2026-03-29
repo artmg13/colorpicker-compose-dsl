@@ -5,7 +5,7 @@ import androidx.compose.ui.Modifier
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
-import ru.adgoncharov.colorpicker.component.circle.CircleColorPickerArea
+import ru.adgoncharov.colorpicker.component.CircleColorPickerArea
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 @ColorPickerDsl

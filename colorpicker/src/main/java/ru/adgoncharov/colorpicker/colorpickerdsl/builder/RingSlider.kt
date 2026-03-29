@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
+import ru.adgoncharov.colorpicker.component.RingColorPickerArea
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import kotlin.math.sqrt
 
@@ -63,7 +64,7 @@ private fun RingSliderDefault(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    ru.adgoncharov.colorpicker.component.ring.RingColorPickerArea(
+    RingColorPickerArea(
         modifier = Modifier
             .then(modifier),
         value = config.value,

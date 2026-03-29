@@ -1,34 +1,31 @@
-package ru.adgoncharov.colorpicker.component.slider
+package ru.adgoncharov.colorpicker.component
 
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Text
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
-import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.HorizontalSliderLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 import ru.adgoncharov.colorpicker.rememberColorPickerState
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 @Composable
-fun HorizontalSlider(
+fun VerticalSlider(
     modifier: Modifier = Modifier,
     value: Float,
     onValueChange: (Float) -> Unit,
@@ -41,19 +38,20 @@ fun HorizontalSlider(
     thumb: @Composable () -> Unit = { DefaultThumb() },
 ) {
     val limiter = remember(isThumbInside, reversed) {
-        Limiter.horizontalSlider(isThumbInside, reversed)
+        Limiter.verticalSlider(isThumbInside, reversed)
     }
+
     val style = remember(shape, contentPadding) {
-        ColorPickerAreaStyle.horizontalSlider(shape = shape, contentPadding = contentPadding)
+        ColorPickerAreaStyle.verticalSlider(shape = shape, contentPadding = contentPadding)
     }
 
     ColorPickerArea(
         modifier = modifier,
         style = style,
-        valueX = value,
-        valueY = 0f,
-        onValueChangeX = onValueChange,
-        onValueChangeY = {},
+        valueX = 0f,
+        valueY = value,
+        onValueChangeX = { },
+        onValueChangeY = onValueChange,
         brush = brush,
         limiter = limiter,
         thumbSize = thumbSize,
@@ -65,85 +63,71 @@ fun HorizontalSlider(
     showBackground = true,
 )
 @Composable
-private fun HorizontalSliderPreview() {
+private fun VerticalSliderPreview() {
 
     val colorPickerState = rememberColorPickerState()
 
-    val hueBrush = ColorPickerBrushes.hueHorizontalSlider()
+    val hueBrush = ColorPickerBrushes.hueVerticalSlider()
 
     val thumbSize = remember { DpSize(24.dp, 24.dp) }
 
-    Column(
+    Row(
         modifier = Modifier
             .fillMaxSize()
             .padding(16.dp),
-        verticalArrangement = Arrangement.spacedBy(16.dp),
-        horizontalAlignment = Alignment.CenterHorizontally
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.Top,
     ) {
 
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = "Default HorizontalSlider",
-            textAlign = TextAlign.Center
-        )
-
-        HorizontalSlider(
+        VerticalSlider(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(24.dp),
+                .height(300.dp)
+                .width(24.dp),
             value = colorPickerState.hue,
             onValueChange = { colorPickerState.changeHue(it) },
             brush = hueBrush,
         )
 
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = "isThumbInside = false HorizontalSlider",
-            textAlign = TextAlign.Center
-        )
-
-        HorizontalSlider(
+        VerticalSlider(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(24.dp),
+                .height(300.dp)
+                .width(24.dp),
             value = colorPickerState.hue,
             onValueChange = { colorPickerState.changeHue(it) },
             brush = hueBrush,
             isThumbInside = false
         )
 
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = "isThumbInside = false and ContentPadding = thumbSize.width / 2 HorizontalSlider",
-            textAlign = TextAlign.Center
-        )
-
-        HorizontalSlider(
+        VerticalSlider(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(24.dp),
+                .height(300.dp)
+                .width(24.dp),
             value = colorPickerState.hue,
             onValueChange = { colorPickerState.changeHue(it) },
             brush = hueBrush,
             isThumbInside = false,
-            contentPadding = PaddingValues(horizontal = thumbSize.width / 2),
             thumbSize = thumbSize,
         )
 
-        Text(
-            modifier = Modifier.fillMaxWidth(),
-            text = "reversed = true HorizontalSlider",
-            textAlign = TextAlign.Center
-        )
-
-        HorizontalSlider(
+        VerticalSlider(
             modifier = Modifier
-                .fillMaxWidth()
-                .height(24.dp),
+                .height(300.dp)
+                .width(24.dp),
             value = colorPickerState.hue,
             onValueChange = { colorPickerState.changeHue(it) },
             brush = hueBrush,
             reversed = true,
+        )
+
+        VerticalSlider(
+            modifier = Modifier
+                .height(300.dp)
+                .width(24.dp),
+            value = colorPickerState.hue,
+            onValueChange = { colorPickerState.changeHue(it) },
+            brush = hueBrush,
+            isThumbInside = true,
+            thumbSize = thumbSize,
         )
     }
 }

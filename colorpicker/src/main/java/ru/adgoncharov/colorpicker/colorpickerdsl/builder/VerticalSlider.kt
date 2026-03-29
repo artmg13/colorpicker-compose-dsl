@@ -9,6 +9,7 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
+import ru.adgoncharov.colorpicker.component.VerticalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 class VerticalSliderScope : BaseAreaScope() {
@@ -28,7 +29,7 @@ fun VerticalSlider(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    ru.adgoncharov.colorpicker.component.slider.VerticalSlider(
+    VerticalSlider(
         modifier = Modifier
             .width(24.dp)
             .fillMaxHeight()

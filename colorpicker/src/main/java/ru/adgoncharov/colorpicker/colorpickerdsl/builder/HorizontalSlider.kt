@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
+import ru.adgoncharov.colorpicker.component.HorizontalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 @ColorPickerDsl
@@ -30,7 +31,7 @@ fun HorizontalSlider(
     val thumbSize = config.thumbSize ?: LocalThumbSize.current
     val thumb = config.thumb ?: LocalColorPickerThumb.current
 
-    ru.adgoncharov.colorpicker.component.slider.HorizontalSlider(
+    HorizontalSlider(
         modifier = Modifier
             .height(24.dp)
             .fillMaxWidth()

@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.component.rectangle
+package ru.adgoncharov.colorpicker.component
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -23,8 +23,6 @@ import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.area.ColorPickerArea
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
-import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RectangleLimiter
-import ru.adgoncharov.colorpicker.component.slider.HorizontalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
 import ru.adgoncharov.colorpicker.rememberColorPickerState

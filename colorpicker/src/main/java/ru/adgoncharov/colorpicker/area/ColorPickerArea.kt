@@ -40,6 +40,7 @@ import androidx.compose.ui.unit.sp
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.CircleLimiter
+import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RectangleLimiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RingLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrushes
