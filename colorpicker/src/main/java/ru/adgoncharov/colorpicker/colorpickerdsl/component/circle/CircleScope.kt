@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.circle
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.circle
 
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPickerDsl
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.BaseAreaScope

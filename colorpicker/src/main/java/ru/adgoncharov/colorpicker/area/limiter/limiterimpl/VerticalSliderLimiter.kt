@@ -4,12 +4,18 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 
+/**
+ * Реализация [Limiter] для вертикальных слайдеров.
+ *
+ * Ограничивает движение указателя строго по вертикальной оси.
+ * Значение X всегда фиксируется по центру ширины области.
+ */
 internal class VerticalSliderLimiter(
     private val isThumbInside: Boolean = true,
     val reversed: Boolean = false,
 ) : Limiter {
 
-    override fun limitPosition(
+    override fun limitPoint(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -29,7 +35,7 @@ internal class VerticalSliderLimiter(
         )
     }
 
-    override fun normalizedPosition(
+    override fun pointToValues(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -52,7 +58,7 @@ internal class VerticalSliderLimiter(
         )
     }
 
-    override fun normalizedToPosition(
+    override fun valuesToPoint(
         valueX: Float,
         valueY: Float,
         sliderSize: IntSize,

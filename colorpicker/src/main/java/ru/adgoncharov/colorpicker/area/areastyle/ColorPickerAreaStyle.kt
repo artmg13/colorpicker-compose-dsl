@@ -11,6 +11,12 @@ import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.drawscope.DrawScope
 import androidx.compose.ui.unit.dp
 
+/**
+ * Представляет собой класс модификатор для областей.
+ *
+ * Можно задать форму области, отступы фактической области.
+ * А также нарисовать что-либо с помощью [draw] после отрисовки всех Brush.
+ */
 @Immutable
 data class ColorPickerAreaStyle(
     val shape: Shape = RectangleShape,

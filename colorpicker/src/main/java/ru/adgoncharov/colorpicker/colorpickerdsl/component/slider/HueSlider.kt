@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.slider
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.slider
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
@@ -10,26 +10,23 @@ import ru.adgoncharov.colorpicker.colorpickerdsl.scope.VerticalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 
 @Composable
-fun ValueSlider(
+fun HueSlider(
     modifier: Modifier = Modifier,
     block: SpecificSliderScope.() -> Unit,
 ) {
-    val config = SpecificSliderScope().apply(block)
-
     val state = LocalColorPickerState.current
 
-    val defaultColor = remember(state.hue, state.saturation, state.value) {
-        Color.hsv(state.hue * 360f, state.saturation, state.value)
+    val config = SpecificSliderScope().apply(block)
+
+    val defaultColor = remember(state.hue) {
+        Color.hsv(state.hue * 360f, 1f, 1f)
     }
 
-    val brush = ColorPickerBrush.valueHorizontalSlider(
-        Color.hsv(state.hue * 360f, state.saturation, 1f),
-        config.reversed
-    )
+    val brush = ColorPickerBrush.hueHorizontalSlider(config.reversed)
 
     HorizontalSlider(modifier, brush) {
-        value = state.value
-        onValueChange = state::changeValue
+        value = state.hue
+        onValueChange = state::changeHue
         this.reversed = config.reversed
         this.shape = config.shape
         this.contentPadding = config.contentPadding
@@ -41,7 +38,7 @@ fun ValueSlider(
 }
 
 @Composable
-fun ValueSliderVertical(
+fun HueSliderVertical(
     modifier: Modifier = Modifier,
     block: SpecificSliderScope.() -> Unit,
 ) {
@@ -49,18 +46,15 @@ fun ValueSliderVertical(
 
     val state = LocalColorPickerState.current
 
-    val defaultColor = remember(state.hue, state.saturation, state.value) {
-        state.color.copy(alpha = 1f)
+    val defaultColor = remember(state.hue) {
+        Color.hsv(state.hue * 360f, 1f, 1f)
     }
 
-    val brush = ColorPickerBrush.valueVerticalSlider(
-        Color.hsv(state.hue * 360f, state.saturation, 1f),
-        !config.reversed
-    )
+    val brush = ColorPickerBrush.hueVerticalSlider(!config.reversed)
 
     VerticalSlider(modifier, brush) {
-        value = state.value
-        onValueChange = state::changeValue
+        value = state.hue
+        onValueChange = state::changeHue
         this.reversed = config.reversed
         this.shape = config.shape
         this.contentPadding = config.contentPadding

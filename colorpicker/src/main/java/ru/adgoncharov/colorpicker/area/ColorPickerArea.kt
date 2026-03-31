@@ -39,8 +39,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ru.adgoncharov.colorpicker.area.areastyle.ColorPickerAreaStyle
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
-import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.CircleLimiter
-import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RectangleLimiter
 import ru.adgoncharov.colorpicker.area.limiter.limiterimpl.RingLimiter
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
 import ru.adgoncharov.colorpicker.thumb.DefaultThumb
@@ -79,8 +77,8 @@ fun ColorPickerArea(
                 offset.y - thumbSizePx.height / 2f
             )
 
-            val limited = limiter.limitPosition(position, sliderSize, thumbSizePx)
-            val normalized = limiter.normalizedPosition(limited, sliderSize, thumbSizePx)
+            val limited = limiter.limitPoint(position, sliderSize, thumbSizePx)
+            val normalized = limiter.pointToValues(limited, sliderSize, thumbSizePx)
 
             onValueChangeX(normalized.x)
             onValueChangeY(normalized.y)
@@ -125,7 +123,7 @@ fun ColorPickerArea(
         )
 
         if (sliderSize != IntSize.Zero) {
-            val offset = limiter.normalizedToPosition(
+            val offset = limiter.valuesToPoint(
                 valueX,
                 valueY,
                 sliderSize,

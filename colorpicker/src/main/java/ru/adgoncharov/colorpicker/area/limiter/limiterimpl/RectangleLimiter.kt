@@ -4,13 +4,18 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 
+/**
+ * Реализация [Limiter] для прямоугольных 2D-областей (например, выбор Saturation/Value).
+ *
+ * Работает в декартовой системе координат, ограничивая движение по обеим осям.
+ */
 internal class RectangleLimiter(
     private val isThumbInside: Boolean = true,
     val reversedX: Boolean = false,
     val reversedY: Boolean = true,
 ) : Limiter {
 
-    override fun limitPosition(
+    override fun limitPoint(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -34,7 +39,7 @@ internal class RectangleLimiter(
         )
     }
 
-    override fun normalizedPosition(
+    override fun pointToValues(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -67,7 +72,7 @@ internal class RectangleLimiter(
         )
     }
 
-    override fun normalizedToPosition(
+    override fun valuesToPoint(
         valueX: Float,
         valueY: Float,
         sliderSize: IntSize,

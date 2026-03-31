@@ -1,8 +1,6 @@
 package ru.adgoncharov.colorpicker.area.limiter.limiterimpl
 
 import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import kotlin.math.PI
@@ -11,12 +9,17 @@ import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+/**
+ * Реализация [Limiter] для кольцевых областей (например, Hue Ring).
+ *
+ * Фиксирует указатель на окружности, проходящей ровно посередине толщины кольца.
+ */
 internal class RingLimiter(
     private val ringWidthPx: Float,
     val reversed: Boolean = false
 ) : Limiter {
 
-    override fun limitPosition(
+    override fun limitPoint(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -40,7 +43,7 @@ internal class RingLimiter(
         )
     }
 
-    override fun normalizedPosition(
+    override fun pointToValues(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -60,7 +63,7 @@ internal class RingLimiter(
         )
     }
 
-    override fun normalizedToPosition(
+    override fun valuesToPoint(
         valueX: Float,
         valueY: Float,
         sliderSize: IntSize,

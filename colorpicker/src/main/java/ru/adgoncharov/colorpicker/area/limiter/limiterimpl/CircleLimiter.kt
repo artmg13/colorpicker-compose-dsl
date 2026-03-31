@@ -4,19 +4,29 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.IntSize
 import ru.adgoncharov.colorpicker.area.limiter.Limiter
 import kotlin.math.PI
-import kotlin.math.abs
 import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.sin
 import kotlin.math.sqrt
 
+/**
+ * Реализация [Limiter] для радиальных (круговых) областей выбора цвета.
+ *
+ * Логика основана на полярной системе координат:
+ * - **Value X**: Угол (Hue), нормализованный от 0 до 1 (соответствует 0–360°).
+ * - **Value Y**: Расстояние от центра (Saturation/Value), нормализованное от 0 до 1.
+ * @property isThumbInside Если true, расчеты производятся так, чтобы весь указатель (thumb)
+ * всегда оставался в пределах круга. Если false, центр указателя может достигать края круга.
+ * @property reversedX Инвертирует направление отсчета угла (по часовой / против часовой).
+ * @property reversedY Инвертирует направление радиуса (от центра к краю / от края к центру).
+ */
 internal class CircleLimiter(
     val isThumbInside: Boolean = true,
     val reversedX: Boolean = false,
     val reversedY: Boolean = false,
 ) : Limiter {
 
-    override fun limitPosition(
+    override fun limitPoint(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -32,7 +42,7 @@ internal class CircleLimiter(
         return if (isThumbInside) limited else fromCenter(limited, thumbSize)
     }
 
-    override fun normalizedPosition(
+    override fun pointToValues(
         position: Offset,
         sliderSize: IntSize,
         thumbSize: IntSize
@@ -53,7 +63,7 @@ internal class CircleLimiter(
         )
     }
 
-    override fun normalizedToPosition(
+    override fun valuesToPoint(
         valueX: Float,
         valueY: Float,
         sliderSize: IntSize,

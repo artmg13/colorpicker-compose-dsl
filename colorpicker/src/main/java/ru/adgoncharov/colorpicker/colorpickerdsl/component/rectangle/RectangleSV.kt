@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.rectangle
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.rectangle
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

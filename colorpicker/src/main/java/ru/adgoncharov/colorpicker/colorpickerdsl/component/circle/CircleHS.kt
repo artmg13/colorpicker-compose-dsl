@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.circle
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.circle
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

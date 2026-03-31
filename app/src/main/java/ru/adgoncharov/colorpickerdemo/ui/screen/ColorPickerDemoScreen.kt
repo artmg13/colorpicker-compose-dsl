@@ -1,19 +1,22 @@
 package ru.adgoncharov.colorpickerdemo.ui.screen
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.togetherWith
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -22,10 +25,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpicker.CircleColorPicker
@@ -35,6 +36,7 @@ import ru.adgoncharov.colorpicker.colorpicker.SliderColorPicker
 import ru.adgoncharov.colorpicker.rememberColorPickerState
 import ru.adgoncharov.colorpickerdemo.ui.components.ColorCard
 import ru.adgoncharov.colorpickerdemo.ui.theme.ColorPickerDemoTheme
+import java.util.Locale.getDefault
 
 @Composable
 fun ColorPickerDemoScreen(
@@ -65,26 +67,19 @@ fun ColorPickerDemoScreen(
                 .padding(vertical = 16.dp),
             contentAlignment = Alignment.Center
         ) {
-            when (currentColorPicker) {
-                ColorPickerType.RING -> RingColorPicker(
-                    state = state,
-                    showAlpha = showAlpha
-                )
-
-                ColorPickerType.SLIDER -> SliderColorPicker(
-                    state = state,
-                    showAlpha = showAlpha
-                )
-
-                ColorPickerType.RECTANGLE -> RectangleColorPicker(
-                    state = state,
-                    showAlpha = showAlpha
-                )
-
-                ColorPickerType.CIRCLE -> CircleColorPicker(
-                    state = state,
-                    showAlpha = showAlpha
-                )
+            AnimatedContent(
+                targetState = currentColorPicker,
+                transitionSpec = {
+                    fadeIn(tween(300)) togetherWith fadeOut(tween(300))
+                },
+                label = "PickerChange"
+            ) { type ->
+                when (type) {
+                    ColorPickerType.RING -> RingColorPicker(state = state, showAlpha = showAlpha)
+                    ColorPickerType.SLIDER -> SliderColorPicker(state = state, showAlpha = showAlpha)
+                    ColorPickerType.RECTANGLE -> RectangleColorPicker(state = state, showAlpha = showAlpha)
+                    ColorPickerType.CIRCLE -> CircleColorPicker(state = state, showAlpha = showAlpha)
+                }
             }
         }
 
@@ -125,35 +120,12 @@ fun ColorPickerVariant(
             )
         }
 
-        item {
+        items(ColorPickerType.entries.toTypedArray()) { type ->
             ColorPickerVariantItem(
-                title = "Ring",
-                selected = selected == ColorPickerType.RING,
-                onClick = { onChange(ColorPickerType.RING) }
-            )
-        }
-
-        item {
-            ColorPickerVariantItem(
-                title = "Circle",
-                selected = selected == ColorPickerType.CIRCLE,
-                onClick = { onChange(ColorPickerType.CIRCLE) }
-            )
-        }
-
-        item {
-            ColorPickerVariantItem(
-                title = "Rectangle",
-                selected = selected == ColorPickerType.RECTANGLE,
-                onClick = { onChange(ColorPickerType.RECTANGLE) }
-            )
-        }
-
-        item {
-            ColorPickerVariantItem(
-                title = "Slider",
-                selected = selected == ColorPickerType.SLIDER,
-                onClick = { onChange(ColorPickerType.SLIDER) }
+                title = type.name.lowercase()
+                    .replaceFirstChar { if (it.isLowerCase()) it.titlecase(getDefault()) else it.toString() },
+                selected = selected == type,
+                onClick = { onChange(type) }
             )
         }
     }
@@ -166,39 +138,27 @@ fun ColorPickerVariantItem(
     onClick: () -> Unit,
 ) {
 
-    val backgroundColor = if (selected) {
-        MaterialTheme.colorScheme.primary // Шалфейный
-    } else {
-        Color.Transparent // Прозрачный, чтобы видеть персиковый фон
-    }
+    val backgroundColor = if (selected)
+        MaterialTheme.colorScheme.primaryContainer
+        else
+            MaterialTheme.colorScheme.surface
 
-    val contentColor = if (selected) {
-        MaterialTheme.colorScheme.onPrimary
-    } else {
-        MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
-    }
-
-    val borderColor = if (selected) {
-        Color.Transparent
-    } else {
-        MaterialTheme.colorScheme.outline
-    }
-
-    Row(
-        modifier = Modifier
-            .clip(CircleShape)
-            .background(backgroundColor)
-            .border(1.dp, borderColor, CircleShape)
-            .padding(horizontal = 16.dp, vertical = 8.dp)
-            .clickable { onClick() },
-        horizontalArrangement = Arrangement.spacedBy(16.dp),
-        verticalAlignment = Alignment.CenterVertically
+    Surface(
+        selected = selected,
+        onClick = onClick,
+        shape = CircleShape,
+        color = backgroundColor,
+        border = BorderStroke(
+            1.dp,
+            if (selected) Color.Transparent else MaterialTheme.colorScheme.outline
+        )
     ) {
         Text(
-            modifier = Modifier.align(Alignment.CenterVertically),
             text = title,
-            textAlign = TextAlign.Center,
-            color = contentColor
+            modifier = Modifier.padding(horizontal = 20.dp, vertical = 10.dp),
+            style = MaterialTheme.typography.labelLarge,
+            color = if (selected) MaterialTheme.colorScheme.onPrimaryContainer
+            else MaterialTheme.colorScheme.onSurface
         )
     }
 }
@@ -207,7 +167,7 @@ fun ColorPickerVariantItem(
     showBackground = true
 )
 @Composable
-private fun ColorPickerDemoScreen() {
+private fun ColorPickerDemoScreenPreview() {
 
     ColorPickerDemoTheme {
         ColorPickerDemoScreen(

@@ -1,41 +1,35 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.slider
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.slider
 
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerState
-import ru.adgoncharov.colorpicker.colorpickerdsl.LocalColorPickerThumb
-import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbColor
-import ru.adgoncharov.colorpicker.colorpickerdsl.LocalThumbSize
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.HorizontalSlider
-import ru.adgoncharov.colorpicker.colorpickerdsl.scope.HorizontalSliderScope
 import ru.adgoncharov.colorpicker.colorpickerdsl.scope.VerticalSlider
-import ru.adgoncharov.colorpicker.component.HorizontalSlider
 import ru.adgoncharov.colorpicker.gradient.ColorPickerBrush
-import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 @Composable
-fun HueSlider(
+fun SaturationSlider(
     modifier: Modifier = Modifier,
     block: SpecificSliderScope.() -> Unit,
 ) {
-    val state = LocalColorPickerState.current
-
     val config = SpecificSliderScope().apply(block)
 
-    val defaultColor = remember(state.hue) {
-        Color.hsv(state.hue * 360f, 1f, 1f)
+    val state = LocalColorPickerState.current
+
+    val defaultColor = remember(state.hue, state.saturation) {
+        Color.hsv(state.hue * 360f, state.saturation, 1f)
     }
 
-    val brush = ColorPickerBrush.hueHorizontalSlider(config.reversed)
+    val brush = ColorPickerBrush.saturationHorizontalSlider(
+        Color.hsv(state.hue * 360f, 1f, 1f),
+        config.reversed
+    )
 
     HorizontalSlider(modifier, brush) {
-        value = state.hue
-        onValueChange = state::changeHue
+        value = state.saturation
+        onValueChange = state::changeSaturation
         this.reversed = config.reversed
         this.shape = config.shape
         this.contentPadding = config.contentPadding
@@ -47,7 +41,7 @@ fun HueSlider(
 }
 
 @Composable
-fun HueSliderVertical(
+fun SaturationSliderVertical(
     modifier: Modifier = Modifier,
     block: SpecificSliderScope.() -> Unit,
 ) {
@@ -55,15 +49,18 @@ fun HueSliderVertical(
 
     val state = LocalColorPickerState.current
 
-    val defaultColor = remember(state.hue) {
-        Color.hsv(state.hue * 360f, 1f, 1f)
+    val defaultColor = remember(state.hue, state.saturation) {
+        Color.hsv(state.hue * 360f, state.saturation, 1f)
     }
 
-    val brush = ColorPickerBrush.hueVerticalSlider(!config.reversed)
+    val brush = ColorPickerBrush.saturationVerticalSlider(
+        Color.hsv(state.hue * 360f, 1f, 1f),
+        !config.reversed
+    )
 
     VerticalSlider(modifier, brush) {
-        value = state.hue
-        onValueChange = state::changeHue
+        value = state.saturation
+        onValueChange = state::changeSaturation
         this.reversed = config.reversed
         this.shape = config.shape
         this.contentPadding = config.contentPadding

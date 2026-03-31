@@ -15,6 +15,7 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
+// ai generated
 data class CheckerboardSpec(
     val gridSize: Dp = 8.dp,
     val lightColor: Color = Color.White,
@@ -32,7 +33,6 @@ data class CheckerboardSpec(
             val canvas = Canvas(bitmap)
             val paint = Paint()
 
-            // Рисуем паттерн 2x2
             paint.color = lightColor
             canvas.drawRect(0f, 0f, sizePx.toFloat(), sizePx.toFloat(), paint)
             canvas.drawRect(sizePx.toFloat(), sizePx.toFloat(), sizePx * 2f, sizePx * 2f, paint)

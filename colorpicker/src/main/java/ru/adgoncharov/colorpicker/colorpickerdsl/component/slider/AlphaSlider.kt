@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.slider
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.slider
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember

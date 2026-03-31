@@ -1,6 +1,5 @@
 package ru.adgoncharov.colorpicker.colorpicker
 
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -13,7 +12,6 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,12 +20,10 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.ColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPicker
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.rectangle.RectangleSV
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.ring.HueRing
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.slider.AlphaSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.rectangle.RectangleSV
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.ring.HueRing
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.slider.AlphaSlider
 import ru.adgoncharov.colorpicker.rememberColorPickerState
-import ru.adgoncharov.colorpicker.thumb.ColoredThumb
-import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 @Composable
 fun RingColorPicker(
@@ -36,8 +32,8 @@ fun RingColorPicker(
     ringWidth: Dp = 24.dp,
     showAlpha: Boolean = false,
     rectangleThumbSize: DpSize = DpSize(24.dp, 24.dp),
-    alphaSliderShape: Shape = CircleShape,
-    alphaSliderThumbSize: DpSize = DpSize(24.dp, 24.dp),
+    sliderShape: Shape = CircleShape,
+    sliderThumbSize: DpSize = DpSize(24.dp, 24.dp),
 ) {
 
     ColorPicker(
@@ -59,33 +55,20 @@ fun RingColorPicker(
             ) {
                 this.ringWidth = ringWidth
                 thumbSize = DpSize(ringWidth, ringWidth)
-                thumb = {
-                    ColoredThumb(Color.hsv(state.hue * 360f, 1f, 1f))
-                }
                 contentInside = {
                     RectangleSV(
                         modifier = Modifier.aspectRatio(1f)
                     ) {
                         thumbSize = rectangleThumbSize
-                        thumb = {
-                            ColoredThumb(state.color.copy(alpha = 1f))
-                        }
                     }
                 }
             }
 
             if (showAlpha) {
 
-                AlphaSlider(
-                    modifier = Modifier
-                        .border(
-                            width = 1.dp,
-                            color = Color.Black,
-                            shape = alphaSliderShape
-                        )
-                ) {
-                    shape = alphaSliderShape
-                    thumbSize = alphaSliderThumbSize
+                AlphaSlider {
+                    shape = sliderShape
+                    thumbSize = sliderThumbSize
                 }
             }
         }

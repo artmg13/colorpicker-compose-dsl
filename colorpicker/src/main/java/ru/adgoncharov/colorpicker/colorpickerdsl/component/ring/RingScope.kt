@@ -1,4 +1,4 @@
-package ru.adgoncharov.colorpicker.colorpickerdsl.components.ring
+package ru.adgoncharov.colorpicker.colorpickerdsl.component.ring
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.Dp

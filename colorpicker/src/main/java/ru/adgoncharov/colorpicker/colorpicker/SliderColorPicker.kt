@@ -1,9 +1,6 @@
 package ru.adgoncharov.colorpicker.colorpicker
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,14 +8,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
@@ -26,13 +19,11 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import ru.adgoncharov.colorpicker.ColorPickerState
 import ru.adgoncharov.colorpicker.colorpickerdsl.ColorPicker
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.slider.AlphaSlider
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.slider.HueSlider
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.slider.SaturationSlider
-import ru.adgoncharov.colorpicker.colorpickerdsl.components.slider.ValueSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.slider.AlphaSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.slider.HueSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.slider.SaturationSlider
+import ru.adgoncharov.colorpicker.colorpickerdsl.component.slider.ValueSlider
 import ru.adgoncharov.colorpicker.rememberColorPickerState
-import ru.adgoncharov.colorpicker.thumb.ColoredThumb
-import ru.adgoncharov.colorpicker.thumb.DefaultThumb
 
 
 @Composable
@@ -55,13 +46,8 @@ fun SliderColorPicker(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            val hueThumb = remember {
-                @Composable { color: Color -> DefaultThumb(color) }
-            }
-
             HueSlider {
                 shape = sliderShape
-                thumb = hueThumb
             }
             SaturationSlider {
                 shape = sliderShape
@@ -77,64 +63,6 @@ fun SliderColorPicker(
         }
     }
 }
-
-//@Composable
-//fun SliderColorPicker(
-//    modifier: Modifier = Modifier,
-//    state: ColorPickerState,
-//    gap: Dp = 8.dp,
-//    showAlpha: Boolean = false,
-//    sliderShape: Shape = RectangleShape,
-//    thumbSize: DpSize = DpSize(24.dp, 24.dp),
-//) {
-//
-//    ColorPicker(
-//        modifier = modifier,
-//        state = state,
-//        thumbSize = thumbSize,
-//    ) {
-//        Column(
-//            verticalArrangement = Arrangement.spacedBy(gap),
-//            horizontalAlignment = Alignment.CenterHorizontally
-//        ) {
-//            val hueThumb = remember(state.hue) {
-//                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, 1f, 1f)) }
-//            }
-//
-//            val saturationThumb = remember(state.hue, state.saturation) {
-//                @Composable { ColoredThumb(Color.hsv(state.hue * 360f, state.saturation, 1f)) }
-//            }
-//
-//            val valueThumb = remember(state.color.copy(1f)) {
-//                @Composable { ColoredThumb(state.color.copy(1f)) }
-//            }
-//
-//            val alphaThumb = remember(state.color) {
-//                @Composable { ColoredThumb(state.color.copy(alpha = 1f)) }
-//            }
-//
-//            HueSlider {
-//                shape = sliderShape
-//                thumb = hueThumb
-//            }
-//            SaturationSlider {
-//                shape = sliderShape
-//                thumb = saturationThumb
-//            }
-//            ValueSlider {
-//                shape = sliderShape
-//                thumb = valueThumb
-//            }
-//            if (showAlpha) {
-//                AlphaSlider {
-//                    shape = sliderShape
-//                    thumb = alphaThumb
-//                }
-//            }
-//        }
-//    }
-//}
-
 
 @Preview(
     showBackground = true
