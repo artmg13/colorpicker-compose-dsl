@@ -32,12 +32,17 @@ android {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
     }
+
+    publishing {
+        singleVariant("release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -55,16 +60,16 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
 
-//afterEvaluate {
-//    publishing {
-//        publications {
-//            register<MavenPublication>("release") {
-//                from(components["release"])
-//
-//                groupId = "com.github.artmg13"
-//                artifactId = "colorpicker"
-//                version = "1.0.0"
-//            }
-//        }
-//    }
-//}
+afterEvaluate {
+    publishing {
+        publications {
+            register<MavenPublication>("release") {
+                from(components["release"])
+
+                groupId = "com.github.artmg13"
+                artifactId = "colorpicker"
+                version = "1.0.0"
+            }
+        }
+    }
+}
