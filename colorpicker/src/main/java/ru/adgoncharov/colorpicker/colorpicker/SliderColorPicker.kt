@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Text
@@ -46,17 +47,25 @@ fun SliderColorPicker(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
 
-            HueSlider {
+            HueSlider(
+                modifier = Modifier.fillMaxWidth().height(24.dp)
+            ) {
                 shape = sliderShape
             }
-            SaturationSlider {
+            SaturationSlider(
+                modifier = Modifier.fillMaxWidth().height(24.dp)
+            ) {
                 shape = sliderShape
             }
-            ValueSlider {
+            ValueSlider(
+                modifier = Modifier.fillMaxWidth().height(24.dp)
+            ) {
                 shape = sliderShape
             }
             if (showAlpha) {
-                AlphaSlider {
+                AlphaSlider(
+                    modifier = Modifier.fillMaxWidth().height(24.dp)
+                ) {
                     shape = sliderShape
                 }
             }

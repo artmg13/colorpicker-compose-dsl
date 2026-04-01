@@ -38,8 +38,6 @@ fun VerticalSlider(
 
     VerticalSlider(
         modifier = Modifier
-            .width(24.dp)
-            .fillMaxHeight()
             .then(modifier),
         value = config.value,
         onValueChange = config.onValueChange,

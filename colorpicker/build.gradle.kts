@@ -1,6 +1,7 @@
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
+    `maven-publish`
 }
 
 android {
@@ -53,3 +54,17 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
 }
+
+//afterEvaluate {
+//    publishing {
+//        publications {
+//            register<MavenPublication>("release") {
+//                from(components["release"])
+//
+//                groupId = "com.github.artmg13"
+//                artifactId = "colorpicker"
+//                version = "1.0.0"
+//            }
+//        }
+//    }
+//}

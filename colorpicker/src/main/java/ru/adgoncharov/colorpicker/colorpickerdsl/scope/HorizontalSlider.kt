@@ -40,8 +40,6 @@ fun HorizontalSlider(
 
     HorizontalSlider(
         modifier = Modifier
-            .height(24.dp)
-            .fillMaxWidth()
             .then(modifier),
         value = config.value,
         onValueChange = config.onValueChange,

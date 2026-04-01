@@ -10,7 +10,7 @@ import ru.adgoncharov.colorpicker.colorpickerdsl.scope.RingPadding
 @ColorPickerDsl
 class SpecificRingScope : BaseAreaScope() {
     var ringWidth: Dp = 24.dp
-    var reversed: Boolean = true
+    var reversed: Boolean = false
     var contentInsidePadding: RingPadding = RingPadding.INNER
     var gapContentInside: Dp = 0.dp
     var contentInside: (@Composable () -> Unit)? = null

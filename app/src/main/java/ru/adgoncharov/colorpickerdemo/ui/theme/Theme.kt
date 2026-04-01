@@ -29,8 +29,6 @@ private val LightColorScheme = lightColorScheme(
 
 @Composable
 fun ColorPickerDemoTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    dynamicColor: Boolean = false,
     content: @Composable () -> Unit
 ) {
     MaterialTheme(

@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
@@ -66,7 +67,9 @@ fun RingColorPicker(
 
             if (showAlpha) {
 
-                AlphaSlider {
+                AlphaSlider(
+                    modifier = Modifier.fillMaxWidth().height(24.dp)
+                ) {
                     shape = sliderShape
                     thumbSize = sliderThumbSize
                 }

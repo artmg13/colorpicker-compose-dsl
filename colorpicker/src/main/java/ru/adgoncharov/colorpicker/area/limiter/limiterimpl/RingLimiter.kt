@@ -33,7 +33,7 @@ internal class RingLimiter(
         val distance = sqrt(dx * dx + dy * dy)
         val safeDistance = if (distance == 0f) 0.0001f else distance
 
-        val radius = countRingRadius(sliderSize, thumbSize)
+        val radius = countRingRadius(sliderSize)
 
         val scale = radius / safeDistance
 
@@ -72,7 +72,7 @@ internal class RingLimiter(
 
         val center = countCenter(sliderSize, thumbSize)
 
-        val radius = countRingRadius(sliderSize, thumbSize)
+        val radius = countRingRadius(sliderSize)
 
         val valX = if (reversed) 1f - valueX else valueX
         val angle = valX * 2f * PI.toFloat()
@@ -90,7 +90,6 @@ internal class RingLimiter(
 
     private fun countRingRadius(
         sliderSize: IntSize,
-        thumbSize: IntSize,
     ): Float {
         val outer = minOf(sliderSize.width, sliderSize.height) / 2f
         val inner = (outer - ringWidthPx)
